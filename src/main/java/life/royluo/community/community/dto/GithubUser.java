@@ -1,5 +1,9 @@
 package life.royluo.community.community.dto;
 
+/**
+ * GitHub通过AccessToken返回用户的参数
+ * 2020.2.21 Roy
+ */
 public class GithubUser {
     private String name;
     private String id;

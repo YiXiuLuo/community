@@ -7,10 +7,14 @@ import okhttp3.*;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+/**
+ * GitHub登录
+ * 2020.2.21 Roy
+ */
 @Component
 public class GithubProvider {
 
+    //获取AccessToken
     public String getAccessToken(AccessTokenDTO accessTokenDTO){
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
 
@@ -33,8 +37,11 @@ public class GithubProvider {
         return null;
     }
 
+    //使用accessToken请求https://api.github.com/user?access_token=accessToken获取user
     public GithubUser getUser(String accessToken){
+        //OkHttpClient是第三方OkHttp的用于请求的
         OkHttpClient client = new OkHttpClient();
+        //使用accessToken请求返回GithubUser
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token="+accessToken)
                 .build();

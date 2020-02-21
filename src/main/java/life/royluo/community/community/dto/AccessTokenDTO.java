@@ -1,5 +1,9 @@
 package life.royluo.community.community.dto;
 
+/**
+ * GitHub三方登录请求返回的参数
+ * 2020.2.21 Roy
+ */
 public class AccessTokenDTO {
 
     private String client_id;
