@@ -39,6 +39,7 @@ public class GithubProvider {
 
     //使用accessToken请求https://api.github.com/user?access_token=accessToken获取user
     public GithubUser getUser(String accessToken){
+        System.out.println("accessToken获取user："+accessToken);
         //OkHttpClient是第三方OkHttp的用于请求的
         OkHttpClient client = new OkHttpClient();
         //使用accessToken请求返回GithubUser
@@ -48,7 +49,7 @@ public class GithubProvider {
         try {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
-            System.out.println(string);
+            System.out.println("user"+string);
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
             return githubUser;
         } catch (IOException e) {

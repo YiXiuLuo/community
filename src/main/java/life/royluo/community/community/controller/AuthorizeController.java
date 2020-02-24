@@ -54,7 +54,7 @@ public class AuthorizeController {
         //通过accessToken请求GitHub返回GithubUser
         GithubUser githubUser = githubProvider.getUser(accessToken);
         //判断GitHub是否登录成功
-        if (githubUser!=null){
+        if (githubUser !=null && githubUser.getId() != null){
             User user = new User();
             //第一次登录UUID生成随机值，方便后续验证使用
             String token = UUID.randomUUID().toString();
