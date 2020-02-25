@@ -74,7 +74,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.2.4</version>
                 <configuration>
-                    <url>jdbc:h2:C:\Users\Roy.Lyx\IdeaProjects\H2\community</url>
+                    <url>jdbc:h2:C:\Software\CodeApp\H2\community</url>
                     <user>sa</user>
                     <password>123</password>
                 </configuration>
