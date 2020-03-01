@@ -1,37 +1,19 @@
 package life.royluo.community.community.dto;
 
+import lombok.Data;
+
 /**
  * GitHub通过AccessToken返回用户的参数
  * 2020.2.21 Roy
+ * @Data自动配上get和set
  */
+@Data
 public class GithubUser {
     private String name;
     private String id;
     private String bio;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
+    //头像url
+    private String avatar_url;
 
     @Override
     public String
