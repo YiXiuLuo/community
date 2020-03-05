@@ -2,7 +2,7 @@ package life.royluo.community.community.controller;
 
 import life.royluo.community.community.Mapper.QuestionMapper;
 import life.royluo.community.community.Mapper.UserMapper;
-import life.royluo.community.community.model.Quesstion;
+import life.royluo.community.community.model.Question;
 import life.royluo.community.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -114,14 +114,14 @@ public class PublishController {
             return "publish";
         }
         //问题赋值入库
-        Quesstion quesstion = new Quesstion();
-        quesstion.setTag(tag);
-        quesstion.setDescription(description);
-        quesstion.setTitle(title);
-        quesstion.setCreator(user.getId());
-        quesstion.setGmtCreate(System.currentTimeMillis());
-        quesstion.setGmtModified(quesstion.getGmtCreate());
-        questionMapper.create(quesstion);
+        Question question = new Question();
+        question.setTag(tag);
+        question.setDescription(description);
+        question.setTitle(title);
+        question.setCreator(user.getId());
+        question.setGmtCreate(System.currentTimeMillis());
+        question.setGmtModified(question.getGmtCreate());
+        questionMapper.create(question);
 
         return "redirect:/";
     }

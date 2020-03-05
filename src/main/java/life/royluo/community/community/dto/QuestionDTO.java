@@ -1,10 +1,10 @@
-package life.royluo.community.community.model;
+package life.royluo.community.community.dto;
 
+import life.royluo.community.community.model.User;
 import lombok.Data;
 
-
-@Data public class Quesstion {
-
+@Data
+public class QuestionDTO {
     private Integer id;
     //标题
     private String title;
@@ -21,5 +21,7 @@ import lombok.Data;
     private Integer viewCount;
     private Integer commentCount;
     private Integer likeCount;
+    private User user;
+
 
 }

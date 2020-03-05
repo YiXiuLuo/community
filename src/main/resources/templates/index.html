@@ -54,16 +54,18 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-list" aria-hidden="true">发现</span></h2>
             <hr>
-            <div class="media">
+            <div class="media" th:each="question : ${questionDTOList}">
                 <div class="media-left">
                     <a href="#" >
-                        <img  class="media-object img-thumbnail" src="https://avatars0.githubusercontent.com/u/26381829?v=4" alt="...">
+                        <img  class="media-object img-thumbnail" th:src="${question.getUser().getAvatarUrl()}" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">怎么快速学会开发</h4>
-                    点击进入看 一休家的猫视频<br>
-                    <small class="text-desc"> 14 个评论 • 6780 次浏览 • 2019-12-06 21:10</small>
+                    <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
+                    <span th:text="${question.getDescription()}"></span><br>
+                    <small class="text-desc"> <span th:text="${question.getCommentCount()}"></span>个评论 •
+                        <span th:text="${question.getViewCount()}"></span> 次浏览 •
+                        创建时间-<span th:text="${#dates.format(question.getGmtCreate(),'yyyy年MM月dd日')}"></span></small>
 
                 </div>
             </div>

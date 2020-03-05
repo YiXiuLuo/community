@@ -53,7 +53,7 @@ public class GithubProvider {
             GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
             return githubUser;
         } catch (IOException e) {
-
+            System.out.println("accessToken获取user报错："+e);
         }
         return null;
     }
