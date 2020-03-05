@@ -2,13 +2,16 @@ package life.royluo.community.community.controller;
 
 import life.royluo.community.community.Mapper.QuestionMapper;
 import life.royluo.community.community.Mapper.UserMapper;
+import life.royluo.community.community.dto.PaginationDTO;
 import life.royluo.community.community.dto.QuestionDTO;
 import life.royluo.community.community.model.User;
 import life.royluo.community.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +38,9 @@ public class IndexController {
      */
     @GetMapping("/")
     public String index(HttpServletRequest request,
-                        Model model) {
+                        Model model,
+                        @RequestParam(name = "page",defaultValue = "1") Integer page,
+                        @RequestParam(name = "size",defaultValue = "5") Integer size) {
 
         //判断是否是历史登录用户
         if (request.getCookies() != null) {
@@ -57,9 +62,9 @@ public class IndexController {
             }
         }
 
-
-        List<QuestionDTO> questionDTOList = questionService.list();
-        model.addAttribute("questionDTOList",questionDTOList);
+        //首页问题展示
+        PaginationDTO paginations = questionService.list(page, size);
+        model.addAttribute("paginations",paginations);
         return "index";
 
     }

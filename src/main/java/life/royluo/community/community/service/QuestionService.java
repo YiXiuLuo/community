@@ -1,8 +1,8 @@
 package life.royluo.community.community.service;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import life.royluo.community.community.Mapper.QuestionMapper;
 import life.royluo.community.community.Mapper.UserMapper;
+import life.royluo.community.community.dto.PaginationDTO;
 import life.royluo.community.community.dto.QuestionDTO;
 import life.royluo.community.community.model.Question;
 import life.royluo.community.community.model.User;
@@ -25,10 +25,18 @@ public class QuestionService {
     /**
      * 查询所有问题
      * @return
+     * @param page
+     * @param size
      */
-    public List<QuestionDTO> list() {
-        //查询所有问题库
-        List<Question> questions = questionMapper.list();
+    public PaginationDTO list(Integer page, Integer size) {
+        PaginationDTO paginationDTO = new PaginationDTO();
+        //获取总行数
+        Integer totalCount = questionMapper.count();
+        //实现显示翻页按钮返回总行数offset
+        Integer offset = paginationDTO.setPagination(totalCount,page,size);
+        //查询问题库分页
+        List<Question> questions = questionMapper.list(offset, size);
+
         //装入questionDTOList
         List<QuestionDTO> questionDTOList = new ArrayList();
         for(Question question : questions){
@@ -39,8 +47,8 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
 
         }
+        paginationDTO.setQuestions(questionDTOList);
 
-
-        return questionDTOList;
+        return paginationDTO;
     }
 }
