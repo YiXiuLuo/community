@@ -51,4 +51,8 @@ public class QuestionService {
 
         return paginationDTO;
     }
+
+    public void list(Integer id, Integer page, Integer size) {
+
+    }
 }
