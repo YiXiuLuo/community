@@ -1,7 +1,6 @@
 package life.royluo.community.community.controller;
 
 import life.royluo.community.community.Mapper.QuestionMapper;
-import life.royluo.community.community.Mapper.UserMapper;
 import life.royluo.community.community.model.Question;
 import life.royluo.community.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -23,31 +21,10 @@ public class PublishController {
     @Autowired
     private QuestionMapper questionMapper;
 
-    @Autowired
-    private UserMapper userMapper;
-
     @GetMapping("/publish")
     public String publish(HttpServletRequest request,Model model){
-        //判断是否登录过
-        User user = null;
-        //获取浏览器的cookies
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null){
-            for (Cookie cookie : cookies) {
-                //找到cookie中的token
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    //去数据库查找是否又对应token
-                    user = userMapper.findByToken(token);
-                    //user不为null时候将用户数据放入session
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    break;
-                }
-            }
-
-        }
+        //判断拦截器函数是否登录成功
+        User user = (User) request.getSession().getAttribute("user");
         //以防外界未登录直接请求
         if (user == null){
             model.addAttribute("error","用户未登录");
@@ -88,26 +65,8 @@ public class PublishController {
             return "publish";
         }
 
-        //判断是否登录过
-        User user = null;
-        //获取浏览器的cookies
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null){
-            for (Cookie cookie : cookies) {
-                //找到cookie中的token
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    //去数据库查找是否又对应token
-                    user = userMapper.findByToken(token);
-                    //user不为null时候将用户数据放入session
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    break;
-                }
-            }
-
-        }
+        //判断拦截器函数是否登录成功
+        User user = (User) request.getSession().getAttribute("user");
         //以防外界未登录直接请求
         if (user == null){
             model.addAttribute("error","用户未登录");

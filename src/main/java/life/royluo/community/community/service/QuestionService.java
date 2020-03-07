@@ -22,6 +22,7 @@ public class QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
 
+
     /**
      * 查询所有问题
      * @return
@@ -52,7 +53,32 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public void list(Integer id, Integer page, Integer size) {
+    public PaginationDTO list(Integer userId, Integer page, Integer size) {
+
+        PaginationDTO paginationDTO = new PaginationDTO();
+        //获取总行数
+        Integer totalCount = questionMapper.countByUserId(userId);
+        //实现显示翻页按钮返回总行数offset
+        Integer offset = paginationDTO.setPagination(totalCount,page,size);
+        //查询问题库分页数据
+        List<Question> questions = questionMapper.listByUserId(userId,offset, size);
+
+        //装入questionDTOList
+        List<QuestionDTO> questionDTOList = new ArrayList();
+        User user = userMapper.findById(userId);
+        for(Question question : questions){
+            QuestionDTO questionDTO = new QuestionDTO();
+            //BeanUtils.copyProperties工具类，将question复制到questionDTO
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+
+        }
+        paginationDTO.setQuestions(questionDTOList);
+
+        return paginationDTO;
+
+
 
     }
 }

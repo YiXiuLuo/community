@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 用户data
+ * 用户问题库data
  * 2020.2.24 Roy
  */
 @Repository
@@ -36,4 +36,21 @@ public interface QuestionMapper {
     @Select("select count(1) from question")
     Integer count();
 
+    /**
+     * 分页查找对于用户的question
+     * @param userId
+     * @param offset
+     * @param size
+     * @return
+     */
+    @Select("select * from question where creator = #{userId} limit #{offset},#{size}")
+    List<Question> listByUserId(@Param(value = "userId") Integer userId, @Param(value = "offset") Integer offset, @Param(value = "size")  Integer size);
+
+    /**
+     * 查对于用户的question总行
+     * @param userId
+     * @return
+     */
+    @Select("select count(1) from question where creator = #{userId}")
+    Integer countByUserId(@Param(value = "userId") Integer userId);
 }

@@ -1,6 +1,7 @@
 package life.royluo.community.community.controller;
 
 import life.royluo.community.community.Mapper.UserMapper;
+import life.royluo.community.community.dto.PaginationDTO;
 import life.royluo.community.community.model.User;
 import life.royluo.community.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -35,38 +35,22 @@ public class ProfileController {
 
 
         if ("questions".equals(action)){
-            model.addAttribute("section","question");
+            model.addAttribute("section","questions");
             model.addAttribute("sectionName","我的提问");
         }else if ("replies".equals(action)){
             model.addAttribute("section","replies");
             model.addAttribute("sectionName","关于我的评论");
         }
-        //判断是否登录过
-        User user = null;
-        //获取浏览器的cookies
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null){
-            for (Cookie cookie : cookies) {
-                //找到cookie中的token
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    //去数据库查找是否又对应token
-                    user = userMapper.findByToken(token);
-                    //user不为null时候将用户数据放入session
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    break;
-                }
-            }
-        }
+        //判断拦截器函数是否登录成功
+        User user = (User) request.getSession().getAttribute("user");
         //以防外界未登录直接请求
         if (user == null){
             model.addAttribute("error","用户未登录");
             return "redirect:/";
         }
 
-        questionService.list(user.getId(),page,size);
+        PaginationDTO paginations = questionService.list(user.getId(), page, size);
+        model.addAttribute("paginations",paginations);
 
         return "profile";
     }

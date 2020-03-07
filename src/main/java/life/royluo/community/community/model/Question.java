@@ -3,7 +3,8 @@ package life.royluo.community.community.model;
 import lombok.Data;
 
 
-@Data public class Question {
+@Data
+public class Question {
 
     private Integer id;
     //标题
