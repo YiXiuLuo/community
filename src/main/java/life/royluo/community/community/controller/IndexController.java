@@ -37,7 +37,7 @@ public class IndexController {
         //首页问题展示
         PaginationDTO paginations = questionService.list(page, size);
         model.addAttribute("paginations",paginations);
-        return "index.html";
+        return "index";
 
     }
 

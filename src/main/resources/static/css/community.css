@@ -12,7 +12,7 @@ body{
     margin-bottom: 15px;
 }
 .media-object{
-    border-radius: 5px;
+
     width: 55px;
     height: 55px;
 }
@@ -23,4 +23,8 @@ body{
 }
 .profile .section{
     margin-top: 20px;
+}
+.community-menu{
+    color: #999;
+    font-size: 13px;
 }

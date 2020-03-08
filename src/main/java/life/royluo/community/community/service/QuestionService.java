@@ -81,4 +81,16 @@ public class QuestionService {
 
 
     }
+
+    //相关问题
+    public QuestionDTO getById(Integer id) {
+
+        Question question = questionMapper.getById(id);
+        //封装复制QuestionDTO
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question,questionDTO);
+        questionDTO.setUser(userMapper.findById(question.getCreator()));
+
+        return questionDTO;
+    }
 }
