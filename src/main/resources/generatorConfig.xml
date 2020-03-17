@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+<!--    <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="org.h2.Driver"
+                        connectionURL="jdbc:h2:C:\Software\CodeApp\H2\community"
+                        userId="sa"
+                        password="123">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+<!--元素用于定义Java模型生成器的属性 targetPackage这是放置生成的类的包 targetProject这用于为生成的对象指定目标项目-->
+        <javaModelGenerator targetPackage="life.royluo.community.community.model" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+<!--元素用于定义SQL映射生成器的属性 targetPackage这是放置生成的类的包 targetProject这用于为生成的对象指定目标项目-->
+        <sqlMapGenerator targetPackage="mapper.xml"  targetProject="src\main\resources">
+<!--            此属性用于选择MBG是否将根据自检表的目录和架构为对象生成不同的Java包。-->
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+<!--Java客户端生成器构建Java接口和类，以方便使用所生成的Java模型和XML映射文件 XMLMAPPER接口将取决于生成的XML映射器文件-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="life.royluo.community.community.Mapper"  targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+<!--元素用于选择数据库中用于自省的表。选定的表将导致为每个表生成以下对象-->
+        <table tableName="user" domainObjectName="User" >
+            <!--            useActualColumnNames默认false驼峰标识-->
+        </table>
+
+    </context>
+</generatorConfiguration>
