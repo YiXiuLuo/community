@@ -7,6 +7,8 @@
 <!--    <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
+<!--        RowBoundsPlugin增加分页函数-->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
         <jdbcConnection driverClass="org.h2.Driver"
                         connectionURL="jdbc:h2:C:\Software\CodeApp\H2\community"
                         userId="sa"
@@ -22,7 +24,7 @@
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 <!--元素用于定义SQL映射生成器的属性 targetPackage这是放置生成的类的包 targetProject这用于为生成的对象指定目标项目-->
-        <sqlMapGenerator targetPackage="mapper.xml"  targetProject="src\main\resources">
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src\main\resources">
 <!--            此属性用于选择MBG是否将根据自检表的目录和架构为对象生成不同的Java包。-->
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
@@ -31,9 +33,8 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 <!--元素用于选择数据库中用于自省的表。选定的表将导致为每个表生成以下对象-->
-        <table tableName="user" domainObjectName="User" >
-            <!--            useActualColumnNames默认false驼峰标识-->
-        </table>
+        <table tableName="user" domainObjectName="User" ></table>
+        <table tableName="question" domainObjectName="Question" ></table>
 
     </context>
 </generatorConfiguration>
