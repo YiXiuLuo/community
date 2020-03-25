@@ -1,5 +1,6 @@
 package life.royluo.community.community.service;
 
+import life.royluo.community.community.Mapper.QuestionExtMapper;
 import life.royluo.community.community.Mapper.QuestionMapper;
 import life.royluo.community.community.Mapper.UserMapper;
 import life.royluo.community.community.dto.PaginationDTO;
@@ -25,7 +26,8 @@ public class QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
-
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     /**
      * 查询所有问题
@@ -127,5 +129,16 @@ public class QuestionService {
                 throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
+    }
+
+    /**
+     * 累计阅读数
+     * @param id
+     */
+    public void inView(Integer id) {
+        Question updateQuestion = new Question();
+        updateQuestion.setId(id);
+        updateQuestion.setViewCount(1);
+        questionExtMapper.incView(updateQuestion);
     }
 }

@@ -23,9 +23,6 @@ public class ProfileController {
 
     @Autowired
     private QuestionService questionService;
-    @Autowired
-    private UserMapper userMapper;
-
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action")String action,
                           @RequestParam(name = "page",defaultValue = "1") Integer page,

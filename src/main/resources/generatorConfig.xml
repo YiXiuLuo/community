@@ -35,6 +35,7 @@
 <!--元素用于选择数据库中用于自省的表。选定的表将导致为每个表生成以下对象-->
         <table tableName="user" domainObjectName="User" ></table>
         <table tableName="question" domainObjectName="Question" ></table>
+        <table tableName="comment" domainObjectName="Comment" ></table>
 
     </context>
 </generatorConfiguration>
