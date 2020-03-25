@@ -4,6 +4,8 @@ import life.royluo.community.community.Mapper.QuestionMapper;
 import life.royluo.community.community.Mapper.UserMapper;
 import life.royluo.community.community.dto.PaginationDTO;
 import life.royluo.community.community.dto.QuestionDTO;
+import life.royluo.community.community.exception.CustomizeErrorCode;
+import life.royluo.community.community.exception.CustomizeException;
 import life.royluo.community.community.model.Question;
 import life.royluo.community.community.model.QuestionExample;
 import life.royluo.community.community.model.User;
@@ -92,6 +94,9 @@ public class QuestionService {
     public QuestionDTO getById(Integer id) {
 
         Question question = questionMapper.selectByPrimaryKey(id);
+        if (question == null){
+            throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         //封装复制QuestionDTO
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
@@ -117,7 +122,10 @@ public class QuestionService {
 
             QuestionExample example = new QuestionExample();
             example.createCriteria().andIdEqualTo(question.getId());
-            questionMapper.updateByExampleSelective(updateQuestion, example);
+            int updated = questionMapper.updateByExampleSelective(updateQuestion, example);
+            if (updated != 1){
+                throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 }

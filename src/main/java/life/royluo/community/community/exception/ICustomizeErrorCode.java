@@ -1,4 +1,5 @@
 package life.royluo.community.community.exception;
 
-public class CustomizeErrorCode {
+public interface ICustomizeErrorCode {
+    String getMessage();
 }
