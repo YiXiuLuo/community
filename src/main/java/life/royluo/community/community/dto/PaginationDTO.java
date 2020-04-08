@@ -29,6 +29,14 @@ public class PaginationDTO {
     private List<Integer> pages = new ArrayList<>();
     //总页数
     private Integer totalPage;
+
+    /**
+     *
+     * @param totalCount 行数
+     * @param page 当前页
+     * @param size 显示多少行
+     * @return offset = size*(page-1)当前页数据开头行数
+     */
     public Integer setPagination(Integer totalCount, Integer page, Integer size) {
 
 
