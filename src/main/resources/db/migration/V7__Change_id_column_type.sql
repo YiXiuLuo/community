@@ -1,0 +1,2 @@
+alter table QUESTION alter column ID bigint default (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_5923BD2B_1107_4D9C_83BB_BDFD858E357F) auto_increment;
+alter table USER alter column ID bigint default (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_4CEEDA19_FF6A_434B_858F_FB2967AE4A46) auto_increment;
