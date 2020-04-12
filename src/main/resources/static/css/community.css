@@ -16,10 +16,16 @@ body{
     width: 55px;
     height: 55px;
 }
+.media-body{
+    padding-top: 17px;
+}
 .text-desc{
     font-size: 12px;
     font-weight: normal;
     color: #999;
+}
+.comment{
+    margin:10px 0px;
 }
 .profile .section{
     margin-top: 20px;
@@ -34,4 +40,9 @@ body{
 }
 .row{
     border: 20px;
+    padding: 15px 0px;
+}
+.comment-btn{
+    float: right;
+    margin-bottom: 10px;
 }
